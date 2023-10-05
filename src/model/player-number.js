@@ -14,17 +14,18 @@ class PlayerNumber {
                 resolve()
             })
         })
+
     }
 
     getInput() {
         return new Promise((resolve) => {
-            // console.log("숫자 야구 게임을 시작합니다. ")
             Console.readLine("숫자 3자리를 입력해 주세요: ", (line) => {
                 if (line.length !== 3 || isNaN(line)) {
-                    console.log("숫자 3자리를 입력해야 합니다. 다시 입력해 주세요.")
-                    resolve(this.getInput())
+                    // console.log("숫자 3자리를 입력해야 합니다. 다시 입력해 주세요.")
+                    // resolve(this.getInput())
+                    throw new Error("종료됩니다.")
                 } else {
-                    console.log("숫자를 입력해주세요 :")
+                    Console.print("숫자를 입력해주세요 :")
                     resolve(line)
                 }
             });
@@ -32,7 +33,6 @@ class PlayerNumber {
     }
 
     getArr() {
-        console.log('#2',this.arr, this.arr.length)   // [ 8909, 2893 ] 2
         return this.arr
     }
 }
