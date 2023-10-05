@@ -13,42 +13,50 @@ const getPlayerNumber = async function () {
 };
 
 const computerPickNumber = new ComputerNumber()
-const computerNumber = computerPickNumber.randomNumber()
-console.log('[computerNumber]', computerNumber)
+// const computerNumber = computerPickNumber.randomNumber()
+// console.log('[computerNumber]', computerNumber)
 
-let strikeCount = 0
-let ballCount = 0
+// let strikeCount = 0
+// let ballCount = 0
 
 const playGame = async () => {
-    const playerNumber = await getPlayerNumber()
+    // const playerNumber = await getPlayerNumber()
+    const computerNumber = computerPickNumber.randomNumber()
+    console.log('[computerNumber]', computerNumber)
 
-    let strikes = 0
-    let balls = 0
+    let strikeCount = 0
+    let ballCount = 0
 
-    playerNumber.forEach((value, index) => {
-        if (value === computerNumber[index]) {
-            strikes++
-        } else if (computerNumber.includes(value)) {
-            balls++
+    // let strikes = 0
+    // let balls = 0
+
+    while (strikeCount < 3) {
+        const playerNumber = await getPlayerNumber();
+        let strikes = 0;
+        let balls = 0;
+
+        playerNumber.forEach((value, index) => {
+            if (value === computerNumber[index]) {
+                strikes++;
+            } else if (computerNumber.includes(value)) {
+                balls++;
+            }
+        });
+
+        strikeCount += strikes;
+        ballCount += balls;
+
+        if (strikeCount === 3) {
+            Console.print("3스트라이크\n" +
+                "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        } else {
+            Console.print(`Result: strikes: ${strikeCount}, balls: ${ballCount}`);
         }
-    })
-
-    strikeCount += strikes
-    ballCount += balls
-
-    if (strikes === 3) {
-        console.log("3스트라이크\n" +
-            "3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-        await restartGame()
-        // return true
-    } else {
-        console.log(`Result: strikes: ${strikeCount}, balls: ${ballCount}`)
-        await playGame()
-        // return false
     }
 
-}
+    await restartGame();
 
+}
 
 
 const restartGame = async () => {
