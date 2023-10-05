@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/controller/App.js",
-    "dev": "nodemon src/service/playing-game.js",
+    "dev": "nodemon src/controller/App.js",
     "test": "jest"
   },
   "repository": {

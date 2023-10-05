@@ -78,7 +78,7 @@ const restartGame = async () => {
 
 
 
-playGame().then(r => {})
+// playGame().then(r => {})
 
 
 

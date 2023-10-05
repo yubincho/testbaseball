@@ -1,13 +1,6 @@
-// import BaseballClass from "./model/baseball-class";
-const BaseballClass = require('../model/player-number')
+
+const playGame = require('../service/playing-game')
 
 
 
-const baseballPlayer = new BaseballClass();
-baseballPlayer.play().then(() => {
-    const arr = baseballPlayer.getArr();
-    console.log("Array:", arr);
-});
-
-
-
+playGame().then(r => {})
