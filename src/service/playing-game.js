@@ -25,7 +25,7 @@ console.log('[computerNumber]', computerNumber)
 let strikeCount = 0
 let ballCount = 0
 
-async function playGame() {
+const playGame = async () => {
     const playerNumber = await getPlayerNumber();
 
     let strikes = 0;
@@ -45,56 +45,44 @@ async function playGame() {
     if (strikes === 3) {
         console.log("3스트라이크\n" +
             "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        // await restartGame()
-        return true; // Indicate that there are 3 strikes
+        await restartGame()
+        // return true
     } else {
         console.log(`Result: strikes: ${strikeCount}, balls: ${ballCount}`);
-        return false; // Indicate that there are not 3 strikes yet
+        await playGame()
+        // return false
     }
+
 }
 
-function askQuestion(question) {
+const questionAsync = (question) => {
     return new Promise((resolve) => {
-        rl.question(question, (answer) => {
-            resolve(answer.trim());
-        });
+        rl.question(question, resolve);
     });
-}
+};
 
-async function restartGame() {
-    while (true) {
-        const answer = await askQuestion("게임을 다시 시작하려면 1을, 종료하려면 2를 입력하세요: ");
-        if (answer === "1") {
-            return true;
-        } else if (answer === "2") {
-            console.log("프로그램이 종료되었습니다.");
-            rl.close();
-            process.exit();
-        } else {
-            console.log("잘못된 입력입니다. 1 또는 2를 입력하세요.");
-        }
+const restartGame = async () => {
+    console.log("끝");
+    const line = await questionAsync("게임을 다시 시작하거나 완전히 종료할 수 있습니다. 재시작을 원하면 1, 종료를 원하시면 2를 입력하세요. ");
+
+    if (line.trim() === '1') {
+        console.log('111');
+        console.log("숫자 야구 게임을 시작합니다. ");
+        await playGame();
+    } else if (line.trim() === '2') {
+        console.log("종료되었습니다")
+        rl.close();
+    } else {
+        console.log("올바른 값을 입력하세요.");
+        await restartGame();
     }
-}
+};
 
 
-async function playUntilThreeStrikes() {
-    let shouldRestart = true;
-
-    while (shouldRestart) {
-        const hasThreeStrikes = await playGame()
-        if (hasThreeStrikes) {
-            shouldRestart = await restartGame()
-        } else {
-            shouldRestart = false
-        }
-    }
-    rl.close();
-}
 
 
-playUntilThreeStrikes().then(() => {
-    console.log("게임 종료");
-});
+
+playGame().then(r => {})
 
 
 

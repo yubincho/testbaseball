@@ -24,11 +24,13 @@ class PlayerNumber {
 
     getInput() {
         return new Promise((resolve) => {
-            this.rl.question("숫자 야구 게임을 시작합니다. 숫자 3자리를 입력해 주세요: ", (line) => {
+            // console.log("숫자 야구 게임을 시작합니다. ")
+            this.rl.question("숫자 3자리를 입력해 주세요: ", (line) => {
                 if (line.length !== 3 || isNaN(line)) {
                     console.log("숫자 3자리를 입력해야 합니다. 다시 입력해 주세요.");
                     resolve(this.getInput()); // Re-prompt if input is not valid
                 } else {
+                    console.log("숫자를 입력해주세요 :")
                     resolve(line);
                 }
             });
