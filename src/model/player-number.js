@@ -1,37 +1,31 @@
-const readline = require("readline");
+
+const { Console } = require('@woowacourse/mission-utils');
 
 class PlayerNumber {
     constructor() {
         this.arr = []
-        this.rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-        });
     }
 
     play() {
         return new Promise((resolve) => {
             this.getInput().then((validNumber) => {
-                console.log("Valid input: ", validNumber);
-                // this.arr.push(PlayerNumber(validNumber.split(' , ')));
+                console.log("Valid input: ", validNumber)
                 this.arr.push(...validNumber.split('').map(Number))
-                // Do something with this.arr if needed
-                this.rl.close();
-                resolve(); // Resolve the promise after processing the input
-            });
-        });
+                resolve()
+            })
+        })
     }
 
     getInput() {
         return new Promise((resolve) => {
             // console.log("숫자 야구 게임을 시작합니다. ")
-            this.rl.question("숫자 3자리를 입력해 주세요: ", (line) => {
+            Console.readLine("숫자 3자리를 입력해 주세요: ", (line) => {
                 if (line.length !== 3 || isNaN(line)) {
-                    console.log("숫자 3자리를 입력해야 합니다. 다시 입력해 주세요.");
-                    resolve(this.getInput()); // Re-prompt if input is not valid
+                    console.log("숫자 3자리를 입력해야 합니다. 다시 입력해 주세요.")
+                    resolve(this.getInput())
                 } else {
                     console.log("숫자를 입력해주세요 :")
-                    resolve(line);
+                    resolve(line)
                 }
             });
         });
