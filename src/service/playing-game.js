@@ -13,15 +13,13 @@ const getPlayerNumber = async function () {
 };
 
 const computerPickNumber = async function () {
-    let computerArr = []
-    computerArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3)
-    return computerArr
+    return new ComputerNumber()
 }
 
 
 const playGame = async () => {
-    // const playerNumber = await getPlayerNumber()
-    const computerNumber = computerPickNumber.randomNumber()
+
+    const computerNumber = (await computerPickNumber()).randomNumber()
     console.log('[computerNumber]', computerNumber)
 
     let strikeCount = 0
