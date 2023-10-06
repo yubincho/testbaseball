@@ -1,6 +1,7 @@
 const PlayerNumber = require('../model/player-number')
 const ComputerNumber = require('../model/computer-number')
 const { Console} = require('@woowacourse/mission-utils');
+const MissionUtils = require("@woowacourse/mission-utils");
 
 
 const getPlayerNumber = async function () {
@@ -11,7 +12,12 @@ const getPlayerNumber = async function () {
     return arr
 };
 
-const computerPickNumber = new ComputerNumber()
+const computerPickNumber = async function () {
+    let computerArr = []
+    computerArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3)
+    return computerArr
+}
+
 
 const playGame = async () => {
     // const playerNumber = await getPlayerNumber()
